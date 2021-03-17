@@ -13,12 +13,12 @@ See https://docs.python.org/3/library/logging.html for more information about ba
 
     import logging
     # for convenient access to logging levels (NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL)
-    from pylog.pylog import get_common_logger, get_common_logging_format
+    from pylog.pylog import get_common_logger_for_module, get_common_logging_format
     # from within a file:
-    logger = get_common_logger(logging.INFO, __name__)
+    logger = get_common_logger_for_module(logging.INFO, __name__)
     or
     log_format = logging.Formatter("some logging format")
-    logger = get_common_logger(logging.INFO, __name__, log_format)
+    logger = get_common_logger_for_module(logging.INFO, __name__, log_format)
 
 The default logging format is:
 

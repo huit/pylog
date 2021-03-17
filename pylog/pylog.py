@@ -18,7 +18,7 @@ def get_common_logging_format():
     )
 
 
-def get_common_logger(module_name: str, level: int = 0, log_format: logging.Formatter = get_common_logging_format()) -> logging.Logger:
+def get_common_logger_for_module(module_name: str, level: int = 0, log_format: logging.Formatter = get_common_logging_format()) -> logging.Logger:
     """
     Creates and returns a new logger for a module
     level should be selected from logging.DEBUG, logging.INFO, etc.
