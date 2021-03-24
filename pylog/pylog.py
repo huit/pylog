@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
 import logging
+import sys
 
 #============================================================================================
 # Logging
 #============================================================================================
+
 
 def get_common_logging_format():
     """
@@ -18,10 +20,17 @@ def get_common_logging_format():
     )
 
 
+class InfoFilter(logging.Filter):
+    def filter(self, rec):
+        return rec.levelno in (logging.DEBUG, logging.INFO)
+
+
 def get_common_logger_for_module(module_name: str, level: int = 0, log_format: logging.Formatter = get_common_logging_format()) -> logging.Logger:
     """
     Creates and returns a new logger for a module
     level should be selected from logging.DEBUG, logging.INFO, etc.
+    DEBUG and INFO will be output to stdout
+    WARNING, ERROR, and CRITICAL will be output to stderr
 
     :param module_name:
     :param level: defaults to logging.NOTSET
@@ -29,9 +38,27 @@ def get_common_logger_for_module(module_name: str, level: int = 0, log_format: l
     :return:
     """
     module_logger = logging.getLogger(name=module_name)
+    module_logger.setLevel(level=level)
+
+    info_stream_handler = logging.StreamHandler(stream=sys.stdout)
+
+    if level > logging.INFO:
+        info_stream_handler.setLevel(level=logging.INFO)
+    else:
+        info_stream_handler.setLevel(level=level)
+
+    info_stream_handler.addFilter(filter=InfoFilter)
+    info_stream_handler.setFormatter(fmt=log_format)
+    module_logger.addHandler(hdlr=info_stream_handler)
+
     stream_handler = logging.StreamHandler()
-    stream_handler.setLevel(level=level)
+
+    if level > logging.WARNING:
+        stream_handler.setLevel(level=level)
+    else:
+        stream_handler.setLevel(level=logging.WARNING)
+
     stream_handler.setFormatter(fmt=log_format)
     module_logger.addHandler(hdlr=stream_handler)
-    module_logger.setLevel(level=level)
+
     return module_logger
