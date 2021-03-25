@@ -25,6 +25,11 @@ class InfoFilter(logging.Filter):
         return rec.levelno in (logging.DEBUG, logging.INFO)
 
 
+class WarningFilter(logging.Filter):
+    def filter(self, rec):
+        return rec.levelno in (logging.WARNING, logging.ERROR, logging.CRITICAL)
+
+
 def get_common_logger_for_module(module_name: str, level: int = 0, log_format: logging.Formatter = get_common_logging_format()) -> logging.Logger:
     """
     Creates and returns a new logger for a module
@@ -49,6 +54,7 @@ def get_common_logger_for_module(module_name: str, level: int = 0, log_format: l
     stream_handler = logging.StreamHandler(stream=sys.stderr)
     stream_handler.setFormatter(fmt=log_format)
     stream_handler.setLevel(level=logging.WARNING)
+    info_stream_handler.addFilter(WarningFilter())
     module_logger.addHandler(hdlr=stream_handler)
 
     return module_logger
