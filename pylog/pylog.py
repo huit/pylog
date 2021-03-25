@@ -64,7 +64,7 @@ def get_common_logger_for_module(module_name: str, level: int = 0, log_format: l
     stream_handler = logging.StreamHandler(sys.stderr)
     stream_handler.setFormatter(fmt=log_format)
     stream_handler.setLevel(level=logging.WARNING)
-    info_stream_handler.addFilter(WarningFilter())
+    stream_handler.addFilter(WarningFilter())
     module_logger.addHandler(hdlr=stream_handler)
 
     return module_logger
