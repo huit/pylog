@@ -17,7 +17,7 @@ are instead routed stderr.
 
 in a suitable virtual env...
 ```
-pip install pip install https://github.com/huit/pylog/archive/v1.0.0.tar.gz
+pip install pip install https://github.com/huit/pylog/archive/refs/tags/v0.0.2.tar.gz
 
 import logging
 # for convenient access to logging levels (NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL)
