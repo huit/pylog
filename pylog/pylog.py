@@ -25,7 +25,9 @@ class InfoFilter(logging.Filter):
         print("InfoFilter")
         print(f"\trec = {rec}")
         print(f"\trec.levelno = {rec.levelno}")
-        return rec.levelno in (logging.DEBUG, logging.INFO)
+        pass_filter = rec.levelno in (logging.DEBUG, logging.INFO)
+        print(f"\tpass_filter = {pass_filter}")
+        return pass_filter
 
 
 class WarningFilter(logging.Filter):
@@ -33,7 +35,9 @@ class WarningFilter(logging.Filter):
         print("WarningFilter")
         print(f"\trec = {rec}")
         print(f"\trec.levelno = {rec.levelno}")
-        return rec.levelno in (logging.WARNING, logging.ERROR, logging.CRITICAL)
+        pass_filter = rec.levelno in (logging.WARNING, logging.ERROR, logging.CRITICAL)
+        print(f"\tpass_filter = {pass_filter}")
+        return pass_filter
 
 
 def get_common_logger_for_module(module_name: str, level: int = 0, log_format: logging.Formatter = get_common_logging_format()) -> logging.Logger:
