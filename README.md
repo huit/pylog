@@ -3,6 +3,10 @@ util to facilitate creation and use of a common logger across files, classes, pr
 
 See https://docs.python.org/3/library/logging.html for more information about basic python logging
 
+## Purpose and Intended Audience
+
+
+
 ## Requirements
     python >=3.7
 

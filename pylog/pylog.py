@@ -42,23 +42,13 @@ def get_common_logger_for_module(module_name: str, level: int = 0, log_format: l
 
     info_stream_handler = logging.StreamHandler(stream=sys.stdout)
     info_stream_handler.setFormatter(fmt=log_format)
-
-    if level > logging.INFO:
-        info_stream_handler.setLevel(level=logging.INFO)
-    else:
-        info_stream_handler.setLevel(level=level)
-
+    info_stream_handler.setLevel(level=logging.DEBUG)
     info_stream_handler.addFilter(InfoFilter())
     module_logger.addHandler(hdlr=info_stream_handler)
 
-    stream_handler = logging.StreamHandler()
+    stream_handler = logging.StreamHandler(stream=sys.stderr)
     stream_handler.setFormatter(fmt=log_format)
-
-    if level > logging.WARNING:
-        stream_handler.setLevel(level=level)
-    else:
-        stream_handler.setLevel(level=logging.WARNING)
-
+    stream_handler.setLevel(level=logging.WARNING)
     module_logger.addHandler(hdlr=stream_handler)
 
     return module_logger
