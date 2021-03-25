@@ -22,15 +22,17 @@ def get_common_logging_format():
 
 class InfoFilter(logging.Filter):
     def filter(self, rec):
-        print(f"rec = {rec}")
-        print(f"rec.levelno = {rec.levelno}")
+        print("InfoFilter")
+        print(f"\trec = {rec}")
+        print(f"\trec.levelno = {rec.levelno}")
         return rec.levelno in (logging.DEBUG, logging.INFO)
 
 
 class WarningFilter(logging.Filter):
     def filter(self, rec):
-        print(f"rec = {rec}")
-        print(f"rec.levelno = {rec.levelno}")
+        print("WarningFilter")
+        print(f"\trec = {rec}")
+        print(f"\trec.levelno = {rec.levelno}")
         return rec.levelno in (logging.WARNING, logging.ERROR, logging.CRITICAL)
 
 
